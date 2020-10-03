@@ -55,92 +55,6 @@ async function getEmployees() {
     })
 }
 
-function runSearch() {
-  inquirer
-    .prompt({
-      name: "action",
-      type: "rawlist",
-      message: "What would you like to do?",
-      choices: [
-        "Add Employee",
-        "Add Department",
-        "Add Role",
-
-        "Update Employee Role",
-        "Update Employee Manager",
-
-        "Remove Employee",
-        "Remove Department",
-        "Remove Role",
-
-        "View All Employees",
-        "View All Departments",
-        "View All Roles",
-
-        "View All Employees By Department",
-        "View All Employees By Manager",
-
-      ]
-    })
-    .then(async function(answer) {
-        switch (answer.action) {
-            case "View All Employees":
-            viewAllEmployees();
-            break;
-
-        case "View All Employees By Department":
-            viewAllEmployeesByDepartment();
-            break;
-
-        case "View All Employees By Manager":
-            viewAllEmployeesByManager();
-            break;
-
-        case "Add Employee":
-            addEmployee();
-            break;
-
-        case "Remove Employee":
-            removeEmployee();
-            break;
-
-        case "Update Employee Role":
-            updateEmployeeRole();
-            break;
-        
-        case "Update Employee Manager":
-            updateEmployeeManager();
-            break;
-        
-        case "Add Department":
-            await createNewDepartment();
-            runSearch();
-            break;
-        
-        case "Add Role":
-            await createNewRole();
-            runSearch();
-            break;
-
-        case "View All Departments":
-            viewAllDepartments();
-            break;
-
-        case "View All Roles":
-            viewAllRoles();
-            break;
-
-        case "View All Employees":
-            viewAllEmployees();
-            break;
-
-        case "Remove Department":
-            deleteDepartmentPrompt();
-            break;
-        }
-    });
-}
-
 function viewAllEmployees() {
     var query = "SELECT * FROM employees;";
     connection.query(query, function(err, res) {
@@ -445,6 +359,92 @@ function updateRoleDepartment(roleIds) {
     
     }
 }
+
+function runSearch() {
+    inquirer
+      .prompt({
+        name: "action",
+        type: "rawlist",
+        message: "What would you like to do?",
+        choices: [
+          "Add Employee",
+          "Add Department",
+          "Add Role",
+  
+          "Update Employee Role",
+          "Update Employee Manager",
+  
+          "Remove Employee",
+          "Remove Department",
+          "Remove Role",
+  
+          "View All Employees",
+          "View All Departments",
+          "View All Roles",
+  
+          "View All Employees By Department",
+          "View All Employees By Manager",
+  
+        ]
+      })
+      .then(async function(answer) {
+          switch (answer.action) {
+              case "View All Employees":
+              viewAllEmployees();
+              break;
+  
+          case "View All Employees By Department":
+              viewAllEmployeesByDepartment();
+              break;
+  
+          case "View All Employees By Manager":
+              viewAllEmployeesByManager();
+              break;
+  
+          case "Add Employee":
+              addEmployee();
+              break;
+  
+          case "Remove Employee":
+              removeEmployee();
+              break;
+  
+          case "Update Employee Role":
+              updateEmployeeRole();
+              break;
+          
+          case "Update Employee Manager":
+              updateEmployeeManager();
+              break;
+          
+          case "Add Department":
+              await createNewDepartment();
+              runSearch();
+              break;
+          
+          case "Add Role":
+              await createNewRole();
+              runSearch();
+              break;
+  
+          case "View All Departments":
+              viewAllDepartments();
+              break;
+  
+          case "View All Roles":
+              viewAllRoles();
+              break;
+  
+          case "View All Employees":
+              viewAllEmployees();
+              break;
+  
+          case "Remove Department":
+              deleteDepartmentPrompt();
+              break;
+          }
+      });
+  }
 
 
 //Which department do you want to delete
